@@ -62,6 +62,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/grant'
+            example:
+              $ref: examples/grant.json
 
   '/grants/{id}':
     get:
@@ -94,7 +96,7 @@ paths:
             schema:
               $ref: '#/components/schemas/grant'
             example:
-              $ref: api/examples/blank.json
+              $ref: api/examples/grant.json
       responses:
         '200':
           description: response showing grant info that has been saved
@@ -104,7 +106,7 @@ paths:
                 $ref: '#/components/schemas/grants'
           examples:
             application/json:
-              $ref: api/examples/blank.json
+              $ref: api/examples/grant.json
 
 # ------------------
 # --- components ---
@@ -159,18 +161,42 @@ components:
       properties:
         id:
           type: integer
-        title:
+        award_id:
           type: string
-        authors:
-          type: array
-          items:
-            $ref: '#/components/schemas/author'
-        abstract:
+        title:
           type: string
         funders:
           type: array
           items:
             $ref: '#/components/schemas/funder'
+        funder_divisions:
+          type: array
+          items:
+            type: string
+        program_reference_codes:
+          type: array
+          items:
+            type: string
+        program_officials:
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+        start_date:
+          type: string
+        end_date:
+          type: string
+        award_amount:
+          type: integer
+        principal_investigator:
+          $ref: '#/components/schemas/person'
+        other_investigators:
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+        institution:
+            $ref: '#/components/schemas/institution'
+        abstract:
+          type: string
         keywords:
           type: array
           items:
