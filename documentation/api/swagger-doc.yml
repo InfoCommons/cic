@@ -118,7 +118,7 @@ components:
     # --- Grants ---
 
     # plural
-    grantss:
+    grants:
       allOf:
         - $ref: '#/components/schemas/embedded_grants'
 
