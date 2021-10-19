@@ -61,10 +61,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/datasets'
-          examples:
-            application/json:
-              $ref: api/examples/blank.json
+                $ref: '#/components/schemas/grant'
 
   '/grants/{id}':
     get:
