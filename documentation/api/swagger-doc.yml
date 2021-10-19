@@ -14,7 +14,7 @@ servers:
     description: Main CIC server
 
 paths:
-  # --- root uri ----
+  # --- root ----
   /:
     get:
       summary: The root of the API
@@ -22,12 +22,18 @@ paths:
       responses:
         '200':
           description: The root of the API
+          content:
+            application/json:
+              schema:
+                type: array
+                links:
+                  type: string
   
   # --- grants ---
   /grants:
     get:
       summary: Get list of all grants
-      description: 
+      description: All grants available in CIC
       parameters:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/per_page'
@@ -39,7 +45,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/grants'        
     post:
-      summary: Create a new grant object
+      summary: Create a new grant
       description: You must be logged in. Use the JSON structure and schema as shown below.
       security:
         - bearerAuth: []
@@ -115,6 +121,29 @@ components:
     root:
       type: object
 
+    # --- general linking ----
+
+    page_links:
+      properties:
+        first:
+          $ref: '#/components/schemas/relation_link'
+        last:
+          $ref: '#/components/schemas/relation_link'
+        prev:
+          $ref: '#/components/schemas/relation_link'
+        next:
+          $ref: '#/components/schemas/relation_link'
+
+    relation_link:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+      required:
+        - href
+
+
     # --- Grants ---
 
     grants:
@@ -138,11 +167,6 @@ components:
       properties:
             id:
               type: integer
-
-    grant_links:
-      properties:
-        _links:
-          allOf:
 
     grant_metadata:
          type: object
