@@ -117,7 +117,6 @@ components:
 
     # --- Grants ---
 
-    # plural
     grants:
       allOf:
         - $ref: '#/components/schemas/embedded_grants'
@@ -133,10 +132,9 @@ components:
               items:
                 $ref: '#/components/schemas/grant'
 
-    #singular
     grant:
       allOf:
-        - $ref: '#/components/schemas/grant_links'
+        - $ref: '#/components/schemas/grant_metadata'
       properties:
             id:
               type: integer
@@ -145,6 +143,26 @@ components:
       properties:
         _links:
           allOf:
+
+    grant_metadata:
+         type: object
+      properties:
+        title:
+          type: string
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/author'
+        abstract:
+          type: string
+        funders:
+          type: array
+          items:
+            $ref: '#/components/schemas/funder'
+        keywords:
+          type: array
+          items:
+            type: string
 
   # -- Parameters --
 
