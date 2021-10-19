@@ -1,0 +1,299 @@
+openapi: 3.0.0
+
+info:
+  title: cic-api
+  description: |
+    The API for the [CIC](https://covidinfocommons.datascience.columbia.edu) platform.
+
+    Additional documentation is available in the [Github Documentation Directory](https://github.com/InfoCommons/cic/tree/main/documentation).
+
+  version: "0.1"
+
+servers:
+  - url: https://covidinfocommons.datascience.columbia.edu/api/
+    description: Main CIC server
+
+paths:
+  # --- root ----
+  /:
+    get:
+      summary: The root of the API
+      description: 
+      responses:
+        '200':
+          description: The root of the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/relation_links'        
+  
+  # --- grants ---
+  /grants:
+    get:
+      summary: Get list of all grants
+      description: All grants available in CIC
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A list of grants.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grants'        
+    post:
+      summary: Create a new grant
+      description: You must be logged in. Use the JSON structure and schema as shown below.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/grant'
+            example:
+              $ref: examples/grant.json
+      responses:
+        '201':
+          description: response showing grant info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grant'
+            example:
+              $ref: examples/grant.json
+
+  '/grants/{id}':
+    get:
+      summary: Get a grant
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A grant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grant'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+    put:
+      summary: Update grant metadata for a given id
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: "json needed for updating a grant"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/grant'
+            example:
+              $ref: api/examples/grant.json
+      responses:
+        '200':
+          description: response showing grant info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grants'
+          examples:
+            application/json:
+              $ref: api/examples/grant.json
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Remove a grant
+      description: Remove a grant
+      responses:
+        '201':
+          description: The grant was removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grant'
+          examples:
+            application/json:
+              $ref: api/examples/grant.json      
+
+# ------------------
+# --- components ---
+# ------------------
+components:
+  schemas:
+
+    # --- root ---
+    root:
+      type: object
+
+    # --- general linking ----
+
+    page_links:
+      properties:
+        first:
+          $ref: '#/components/schemas/relation_link'
+        last:
+          $ref: '#/components/schemas/relation_link'
+        prev:
+          $ref: '#/components/schemas/relation_link'
+        next:
+          $ref: '#/components/schemas/relation_link'
+
+    relation_links:
+      type: array
+      items:
+        $ref: '#/components/schemas/relation_link'
+
+    relation_link:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+      required:
+        - href
+
+
+    # --- Grants ---
+
+    grants:
+      type: object
+      properties:
+        'grants':
+          type: array
+          items:
+            $ref: '#/components/schemas/grant'
+
+    grant:
+      type: object
+      properties:
+        id:
+          type: integer
+        award_id:
+          type: string
+        link:
+          type: string
+        title:
+          type: string
+        funders:
+          type: array
+          items:
+            $ref: '#/components/schemas/funder'
+        funder_divisions:
+          type: array
+          items:
+            type: string
+        program_reference_codes:
+          type: array
+          items:
+            type: string
+        program_officials:
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+        start_date:
+          type: string
+        end_date:
+          type: string
+        award_amount:
+          type: integer
+        principal_investigator:
+          $ref: '#/components/schemas/person'
+        other_investigators:
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+        awardee_organization:
+            $ref: '#/components/schemas/organization'
+        abstract:
+          type: string
+        keywords:
+          type: array
+          items:
+            type: string
+
+    # --- People ---
+
+    people:
+      type: object
+      properties:
+        'people':
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+
+    person:
+      type: object
+      properties:
+        id:
+          type: integer
+
+    # --- Funders ---
+
+    funders:
+      type: object
+      properties:
+        'funders':
+          type: array
+          items:
+            $ref: '#/components/schemas/funder'
+
+    funder:
+      type: object
+      properties:
+        id:
+          type: integer
+
+    # --- Organizations ---
+
+    organizations:
+      type: object
+      properties:
+        'organizations':
+          type: array
+          items:
+            $ref: '#/components/schemas/organization'
+
+    organization:
+      type: object
+      properties:
+        id:
+          type: integer
+
+  # -- Parameters --
+
+  parameters:
+    id:
+      in: query
+      name: id
+      schema:
+        type: integer
+      description:
+        Identifier of an object.
+
+    page:
+      in: query
+      name: page
+      schema:
+        type: integer
+      description:
+        Which page of results to view. Defaults to page 1.
+
+    per_page:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+      description:
+        Number of results to return on each page. Defaults
+        to 20. Maximum allowed is 100.
+
