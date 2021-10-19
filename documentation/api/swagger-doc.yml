@@ -54,9 +54,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/grant_metadata'
+              $ref: '#/components/schemas/grant'
             example:
-              $ref: api/examples/blank.json
+              $ref: examples/grant.json
       responses:
         '201':
           description: response showing grant info that has been saved
@@ -80,7 +80,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/grant_metadata'
+                $ref: '#/components/schemas/grant'
           examples:
             application/json:
               $ref: api/examples/blank.json
@@ -97,7 +97,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/grant_metadata'
+              $ref: '#/components/schemas/grant'
             example:
               $ref: api/examples/blank.json
       responses:
@@ -147,30 +147,18 @@ components:
     # --- Grants ---
 
     grants:
-      allOf:
-        - $ref: '#/components/schemas/embedded_grants'
-
-    embedded_grants:
       type: object
       properties:
-        _embedded:
-          type: object
-          properties:
-            'grants':
-              type: array
-              items:
-                $ref: '#/components/schemas/grant'
+        'grants':
+          type: array
+          items:
+            $ref: '#/components/schemas/grant'
 
     grant:
-      allOf:
-        - $ref: '#/components/schemas/grant_metadata'
-      properties:
-            id:
-              type: integer
-
-    grant_metadata:
       type: object
       properties:
+        id:
+          type: integer
         title:
           type: string
         authors:
