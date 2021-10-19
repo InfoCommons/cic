@@ -193,14 +193,62 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/person'
-        institution:
-            $ref: '#/components/schemas/institution'
+        grantee_organization:
+            $ref: '#/components/schemas/organization'
         abstract:
           type: string
         keywords:
           type: array
           items:
             type: string
+
+    # --- People ---
+
+    people:
+      type: object
+      properties:
+        'people':
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+
+    person:
+      type: object
+      properties:
+        id:
+          type: integer
+
+    # --- Funders ---
+
+    funders:
+      type: object
+      properties:
+        'funders':
+          type: array
+          items:
+            $ref: '#/components/schemas/funder'
+
+    funder:
+      type: object
+      properties:
+        id:
+          type: integer
+
+    # --- Organizations ---
+
+    organizations:
+      type: object
+      properties:
+        'organizations':
+          type: array
+          items:
+            $ref: '#/components/schemas/organization'
+
+    organization:
+      type: object
+      properties:
+        id:
+          type: integer
 
   # -- Parameters --
 
