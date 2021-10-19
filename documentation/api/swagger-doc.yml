@@ -180,6 +180,8 @@ components:
           type: integer
         award_id:
           type: string
+        link:
+          type: string
         title:
           type: string
         funders:
@@ -210,7 +212,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/person'
-        grantee_organization:
+        awardee_organization:
             $ref: '#/components/schemas/organization'
         abstract:
           type: string
