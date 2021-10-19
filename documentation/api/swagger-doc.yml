@@ -107,6 +107,23 @@ paths:
           examples:
             application/json:
               $ref: api/examples/grant.json
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Remove a grant
+      description: Remove a grant
+      responses:
+        '201':
+          description: The grant was removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grant'
+          examples:
+            application/json:
+              $ref: api/examples/grant.json      
 
 # ------------------
 # --- components ---
