@@ -1,0 +1,176 @@
+openapi: 3.0.0
+
+info:
+  title: cic-api
+  description: |
+    The API for the [CIC](https://covidinfocommons.datascience.columbia.edu) platform.
+
+    Additional documentation is available in the [Github Documentation Directory](https://github.com/InfoCommons/cic/tree/main/documentation).
+
+  version: "0.1"
+
+servers:
+  - url: https://covidinfocommons.datascience.columbia.edu/api/
+    description: Main CIC server
+
+paths:
+  # --- root uri ----
+  /:
+    get:
+      summary: The root of the API
+      description: 
+      responses:
+        '200':
+          description: The root of the API
+  
+  # --- grants ---
+  /grants:
+    get:
+      summary: Get list of all grants
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A list of grants.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grants'        
+    post:
+      summary: Create a new grant object
+      description: You must be logged in. Use the JSON structure and schema as shown below.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/grant_metadata'
+            example:
+              $ref: api/examples/blank.json
+      responses:
+        '201':
+          description: response showing grant info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/datasets'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+
+  '/grants/{id}':
+    get:
+      summary: Get a grant
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A grant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grant_metadata'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+    put:
+      summary: Update grant metadata for a given id
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: "json needed for updating a grant"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/grant_metadata'
+            example:
+              $ref: api/examples/blank.json
+      responses:
+        '200':
+          description: response showing grant info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grants'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+
+# ------------------
+# --- components ---
+# ------------------
+components:
+  schemas:
+
+    # --- root ---
+    root:
+      type: object
+
+    # --- Grants ---
+
+    # plural
+    grantss:
+      allOf:
+        - $ref: '#/components/schemas/embedded_grants'
+
+    embedded_grants:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            'grants':
+              type: array
+              items:
+                $ref: '#/components/schemas/grant'
+
+    #singular
+    grant:
+      allOf:
+        - $ref: '#/components/schemas/grant_links'
+      properties:
+            id:
+              type: integer
+
+    grant_links:
+      properties:
+        _links:
+          allOf:
+
+  # -- Parameters --
+
+  parameters:
+    id:
+      in: query
+      name: id
+      schema:
+        type: integer
+      description:
+        Identifier of an object.
+
+    page:
+      in: query
+      name: page
+      schema:
+        type: integer
+      description:
+        Which page of results to view. Defaults to page 1.
+
+    per_page:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+      description:
+        Number of results to return on each page. Defaults
+        to 20. Maximum allowed is 100.
+

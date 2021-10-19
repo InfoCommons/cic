@@ -39,7 +39,9 @@
     window.onload = function() {
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
-        url: "https://raw.githubusercontent.com/InfoCommons/cic/swagger/documentation/api/swagger.json",
+        // Reading the swagger file directly out of GitHub is temporary, until we have
+        // it running properly on a CIC server.
+        url: "https://raw.githubusercontent.com/InfoCommons/cic/swagger/documentation/api/swagger-doc.yml",
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
