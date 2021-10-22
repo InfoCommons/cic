@@ -14,6 +14,7 @@ servers:
     description: Main CIC server
 
 tags:
+  - name: root
   - name: grants
     description: Funded grants.
   - name: organizations
@@ -32,6 +33,8 @@ paths:
   /:
     get:
       summary: The root of the API
+      tags:
+        - root
       description: 
       responses:
         '200':
