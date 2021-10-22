@@ -15,6 +15,7 @@ servers:
 
 tags:
   - name: root
+    description: Root-level API calls
   - name: grants
     description: Funded grants.
   - name: organizations
