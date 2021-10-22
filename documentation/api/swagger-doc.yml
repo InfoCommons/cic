@@ -13,11 +13,29 @@ servers:
   - url: https://covidinfocommons.datascience.columbia.edu/api/
     description: Main CIC server
 
+tags:
+  - name: root
+    description: Root-level API calls
+  - name: grants
+    description: Funded grants.
+  - name: organizations
+    description: Universities and other organizations that perform research.
+  - name: people
+    description: Researchers
+  - name: publications
+    description: Journal articles and other scientific literature.
+  - name: datasets
+    description: Collections of data files.
+  - name: assets
+    description: Data files and other files associated with research.
+
 paths:
   # --- root ----
   /:
     get:
       summary: The root of the API
+      tags:
+        - root
       description: 
       responses:
         '200':
@@ -31,6 +49,8 @@ paths:
   /grants:
     get:
       summary: Get list of all grants
+      tags:
+        - grants
       description: All grants available in CIC
       parameters:
         - $ref: '#/components/parameters/page'
@@ -44,6 +64,8 @@ paths:
                 $ref: '#/components/schemas/grants'        
     post:
       summary: Create a new grant
+      tags:
+        - grants
       description: You must be logged in. Use the JSON structure and schema as shown below.
       security:
         - bearerAuth: []
@@ -68,6 +90,8 @@ paths:
   '/grants/{id}':
     get:
       summary: Get a grant
+      tags:
+        - grants
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -83,6 +107,8 @@ paths:
               $ref: api/examples/blank.json
     put:
       summary: Update grant metadata for a given id
+      tags:
+        - grants
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -113,6 +139,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
       summary: Remove a grant
+      tags:
+        - grants
       description: Remove a grant
       responses:
         '201':
@@ -130,6 +158,8 @@ paths:
   /organizations:
     get:
       summary: Get list of all organizations
+      tags:
+        - organizations
       description: All organizations available in CIC
       parameters:
         - $ref: '#/components/parameters/page'
@@ -143,6 +173,8 @@ paths:
                 $ref: '#/components/schemas/organizations'        
     post:
       summary: Create a new organization
+      tags:
+        - organizations
       description: You must be logged in. Use the JSON structure and schema as shown below.
       security:
         - bearerAuth: []
@@ -167,6 +199,8 @@ paths:
   '/organizations/{id}':
     get:
       summary: Get an organization
+      tags:
+        - organizations
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -182,6 +216,8 @@ paths:
               $ref: api/examples/blank.json
     put:
       summary: Update organization metadata for a given id
+      tags:
+        - organizations
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -212,6 +248,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
       summary: Remove an organization
+      tags:
+        - organizations
       description: Remove an organization
       responses:
         '201':
@@ -228,6 +266,8 @@ paths:
   /people:
     get:
       summary: Get list of all people
+      tags:
+        - people
       description: All people available in CIC
       parameters:
         - $ref: '#/components/parameters/page'
@@ -241,6 +281,8 @@ paths:
                 $ref: '#/components/schemas/people'        
     post:
       summary: Create a new person
+      tags:
+        - people
       description: You must be logged in. Use the JSON structure and schema as shown below.
       security:
         - bearerAuth: []
@@ -265,6 +307,8 @@ paths:
   '/people/{id}':
     get:
       summary: Get a person
+      tags:
+        - people
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -280,6 +324,8 @@ paths:
               $ref: api/examples/blank.json
     put:
       summary: Update person metadata for a given id
+      tags:
+        - people
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -310,6 +356,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
       summary: Remove a person
+      tags:
+        - people
       description: Remove a person
       responses:
         '201':
@@ -326,6 +374,8 @@ paths:
   /publications:
     get:
       summary: Get list of all publicaitons
+      tags:
+        - publications
       description: All publications available in CIC
       parameters:
         - $ref: '#/components/parameters/page'
@@ -339,6 +389,8 @@ paths:
                 $ref: '#/components/schemas/publications'        
     post:
       summary: Create a new publication
+      tags:
+        - publications
       description: You must be logged in. Use the JSON structure and schema as shown below.
       security:
         - bearerAuth: []
@@ -363,6 +415,8 @@ paths:
   '/publications/{id}':
     get:
       summary: Get a publication
+      tags:
+        - publications
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -378,6 +432,8 @@ paths:
               $ref: api/examples/blank.json
     put:
       summary: Update publication metadata for a given id
+      tags:
+        - publications
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -408,6 +464,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
       summary: Remove a publication
+      tags:
+        - publications
       description: Remove a publication
       responses:
         '201':
@@ -424,6 +482,8 @@ paths:
   /datasets:
     get:
       summary: Get list of all datasets
+      tags:
+        - datasets
       description: All datasets available in CIC
       parameters:
         - $ref: '#/components/parameters/page'
@@ -437,6 +497,8 @@ paths:
                 $ref: '#/components/schemas/datasets'        
     post:
       summary: Create a new dataset
+      tags:
+        - datasets
       description: You must be logged in. Use the JSON structure and schema as shown below.
       security:
         - bearerAuth: []
@@ -461,6 +523,8 @@ paths:
   '/datasets/{id}':
     get:
       summary: Get a dataset
+      tags:
+        - datasets
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -476,6 +540,8 @@ paths:
               $ref: api/examples/blank.json
     put:
       summary: Update dataset metadata for a given id
+      tags:
+        - datasets
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -506,6 +572,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
       summary: Remove a dataset
+      tags:
+        - datasets
       description: Remove a dataset
       responses:
         '201':
@@ -522,6 +590,8 @@ paths:
   /assets:
     get:
       summary: Get list of all assets
+      tags:
+        - assets
       description: All assets available in CIC
       parameters:
         - $ref: '#/components/parameters/page'
@@ -535,6 +605,8 @@ paths:
                 $ref: '#/components/schemas/assets'        
     post:
       summary: Create a new asset
+      tags:
+        - assets
       description: You must be logged in. Use the JSON structure and schema as shown below.
       security:
         - bearerAuth: []
@@ -559,6 +631,8 @@ paths:
   '/assets/{id}':
     get:
       summary: Get an asset
+      tags:
+        - assets
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -574,6 +648,8 @@ paths:
               $ref: api/examples/blank.json
     put:
       summary: Update asset metadata for a given id
+      tags:
+        - assets
       description: 
       parameters:
         - $ref: '#/components/parameters/id'
@@ -604,6 +680,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
       summary: Remove an asset
+      tags:
+        - assets
       description: Remove an asset
       responses:
         '201':
