@@ -125,6 +125,498 @@ paths:
             application/json:
               $ref: api/examples/grant.json      
 
+
+  # --- organizations ---
+  /organizations:
+    get:
+      summary: Get list of all organizations
+      description: All organizations available in CIC
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A list of organizations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizations'        
+    post:
+      summary: Create a new organization
+      description: You must be logged in. Use the JSON structure and schema as shown below.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organization'
+            example:
+              $ref: examples/organization.json
+      responses:
+        '201':
+          description: response showing organization info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organization'
+            example:
+              $ref: examples/organization.json
+
+  '/organizations/{id}':
+    get:
+      summary: Get an organization
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: An organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organization'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+    put:
+      summary: Update organization metadata for a given id
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: "json needed for updating an organization"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organization'
+            example:
+              $ref: api/examples/organization.json
+      responses:
+        '200':
+          description: response showing organization info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organization'
+          examples:
+            application/json:
+              $ref: api/examples/organization.json
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Remove an organization
+      description: Remove an organization
+      responses:
+        '201':
+          description: The organization was removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organization'
+          examples:
+            application/json:
+              $ref: api/examples/organization.json      
+
+  # --- people ---
+  /people:
+    get:
+      summary: Get list of all people
+      description: All people available in CIC
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A list of people.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/people'        
+    post:
+      summary: Create a new person
+      description: You must be logged in. Use the JSON structure and schema as shown below.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/person'
+            example:
+              $ref: examples/person.json
+      responses:
+        '201':
+          description: response showing person info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/person'
+            example:
+              $ref: examples/person.json
+
+  '/people/{id}':
+    get:
+      summary: Get a person
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/person'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+    put:
+      summary: Update person metadata for a given id
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: "json needed for updating a person"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/person'
+            example:
+              $ref: api/examples/person.json
+      responses:
+        '200':
+          description: response showing person info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/person'
+          examples:
+            application/json:
+              $ref: api/examples/person.json
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Remove a person
+      description: Remove a person
+      responses:
+        '201':
+          description: The person was removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/person'
+          examples:
+            application/json:
+              $ref: api/examples/person.json      
+
+  # --- publications ---
+  /publications:
+    get:
+      summary: Get list of all publicaitons
+      description: All publications available in CIC
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A list of publications.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/publications'        
+    post:
+      summary: Create a new publication
+      description: You must be logged in. Use the JSON structure and schema as shown below.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/publication'
+            example:
+              $ref: examples/publication.json
+      responses:
+        '201':
+          description: response showing publication info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/publication'
+            example:
+              $ref: examples/publication.json
+
+  '/publications/{id}':
+    get:
+      summary: Get a publication
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A publication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/publication'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+    put:
+      summary: Update publication metadata for a given id
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: "json needed for updating a publication"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/publication'
+            example:
+              $ref: api/examples/publication.json
+      responses:
+        '200':
+          description: response showing publication info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/publications'
+          examples:
+            application/json:
+              $ref: api/examples/publication.json
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Remove a publication
+      description: Remove a publication
+      responses:
+        '201':
+          description: The publication was removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/publication'
+          examples:
+            application/json:
+              $ref: api/examples/publication.json      
+
+  # --- datasets ---
+  /datasets:
+    get:
+      summary: Get list of all datasets
+      description: All datasets available in CIC
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A list of datasets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/datasets'        
+    post:
+      summary: Create a new dataset
+      description: You must be logged in. Use the JSON structure and schema as shown below.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dataset'
+            example:
+              $ref: examples/dataset.json
+      responses:
+        '201':
+          description: response showing dataset info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataset'
+            example:
+              $ref: examples/dataset.json
+
+  '/datasets/{id}':
+    get:
+      summary: Get a dataset
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A dataset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataset'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+    put:
+      summary: Update dataset metadata for a given id
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: "json needed for updating a dataset"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dataset'
+            example:
+              $ref: api/examples/dataset.json
+      responses:
+        '200':
+          description: response showing dataset info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/datasets'
+          examples:
+            application/json:
+              $ref: api/examples/dataset.json
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Remove a dataset
+      description: Remove a dataset
+      responses:
+        '201':
+          description: The dataset was removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataset'
+          examples:
+            application/json:
+              $ref: api/examples/dataset.json      
+
+  # --- assets ---
+  /assets:
+    get:
+      summary: Get list of all assets
+      description: All assets available in CIC
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A list of assets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/assets'        
+    post:
+      summary: Create a new asset
+      description: You must be logged in. Use the JSON structure and schema as shown below.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/asset'
+            example:
+              $ref: examples/asset.json
+      responses:
+        '201':
+          description: response showing asset info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset'
+            example:
+              $ref: examples/asset.json
+
+  '/assets/{id}':
+    get:
+      summary: Get an asset
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: An asset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset'
+          examples:
+            application/json:
+              $ref: api/examples/blank.json
+    put:
+      summary: Update asset metadata for a given id
+      description: 
+      parameters:
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: "json needed for updating an asset"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/asset'
+            example:
+              $ref: api/examples/asset.json
+      responses:
+        '200':
+          description: response showing asset info that has been saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset'
+          examples:
+            application/json:
+              $ref: api/examples/asset.json
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Remove an asset
+      description: Remove an asset
+      responses:
+        '201':
+          description: The asset was removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset'
+          examples:
+            application/json:
+              $ref: api/examples/asset.json      
+
+
 # ------------------
 # --- components ---
 # ------------------
@@ -180,14 +672,10 @@ components:
           type: integer
         award_id:
           type: string
-        link:
-          type: string
         title:
           type: string
-        funders:
-          type: array
-          items:
-            $ref: '#/components/schemas/funder'
+        funder_id:
+          $ref: '#/components/schemas/funder'
         funder_divisions:
           type: array
           items:
@@ -206,13 +694,13 @@ components:
           type: string
         award_amount:
           type: integer
-        principal_investigator:
+        principal_investigator_id:
           $ref: '#/components/schemas/person'
         other_investigators:
           type: array
           items:
             $ref: '#/components/schemas/person'
-        awardee_organization:
+        awardee_organization_id:
             $ref: '#/components/schemas/organization'
         abstract:
           type: string
@@ -236,6 +724,24 @@ components:
       properties:
         id:
           type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        orcid:
+          type: string
+        emails:
+          type: string
+        private_emails:
+          type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        affiliations:
+          type: array
+          items:
+            $ref: '#/components/schemas/organization'
 
     # --- Funders ---
 
@@ -252,6 +758,11 @@ components:
       properties:
         id:
           type: integer
+        ror:
+          type: string
+        name:
+          type: string
+
 
     # --- Organizations ---
 
@@ -268,6 +779,148 @@ components:
       properties:
         id:
           type: integer
+        ror:
+          type: string
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+
+    # --- Publications ---
+
+    publications:
+      type: object
+      properties:
+        'publications':
+          type: array
+          items:
+            $ref: '#/components/schemas/publication'
+
+    publication:
+      type: object
+      properties:
+        id:
+          type: integer
+        doi:
+          type: string
+        title:
+          type: string
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/grant'
+        issn:
+          type: string
+        keywords:
+          type: array
+          items: 
+            type: string
+        language:
+          type: string
+        publication_date:
+          type: string
+        'type':
+          type: string
+          
+  # --- Datasets ---
+
+    datasets:
+      type: object
+      properties:
+        'datasets':
+          type: array
+          items:
+            $ref: '#/components/schemas/dataset'
+
+    dataset:
+      type: object
+      properties:
+        id:
+          type: integer
+        doi:
+          type: string
+        title:
+          type: string
+        download_path:
+          type: string
+        size:
+          type: string
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/grant'
+        publications:
+          type: array
+          items:
+            $ref: '#/components/schemas/publication'
+        keywords:
+          type: array
+          items: 
+            type: string
+        publication_date:
+          type: string
+        mime_type:
+          type: string
+
+
+  # --- Assets ---
+
+    assets:
+      type: object
+      properties:
+        'assets':
+          type: array
+          items:
+            $ref: '#/components/schemas/asset'
+
+    asset:
+      type: object
+      properties:
+        id:
+          type: integer
+        doi:
+          type: string
+        filename:
+          type: string
+        download_path:
+          type: string
+        size:
+          type: string
+        author_id:
+          type: integer
+        grant_id:
+          type: integer
+        publication_id:
+          type: integer
+        dataset_id:
+          type: integer
+        organization_id:
+          type: integer
+        keywords:
+          type: array
+          items: 
+            type: string
+        mime_type:
+          type: string
+        checksum:
+          type: string
+
 
   # -- Parameters --
 
