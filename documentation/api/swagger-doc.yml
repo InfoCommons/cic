@@ -752,7 +752,7 @@ components:
           type: string
         title:
           type: string
-        funder_id:
+        funder:
           $ref: '#/components/schemas/funder'
         funder_divisions:
           type: array
@@ -772,13 +772,13 @@ components:
           type: string
         award_amount:
           type: integer
-        principal_investigator_id:
+        principal_investigator:
           $ref: '#/components/schemas/person'
         other_investigators:
           type: array
           items:
             $ref: '#/components/schemas/person'
-        awardee_organization_id:
+        awardee_organization:
             $ref: '#/components/schemas/organization'
         abstract:
           type: string
